@@ -1,9 +1,10 @@
 FROM gentoo/portage:latest as portage
-FROM gentoo/stage3:desktop
+FROM gentoo/stage3:desktop as production
 
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
 
 WORKDIR /
+ENV PATH="/root/.local/bin:${PATH}"
 RUN set -eux;                                                                       \
                                                                                     \
     eselect news read --quite new >/dev/null 2&>1;                                  \
@@ -23,12 +24,7 @@ RUN set -eux;                                                                   
         dev-util/pkgcheck                                                           \
         dev-vcs/git;                                                                \
                                                                                     \
-    eix-update;                                                                     \
-                                                                                    \
-    pip install --user nvchecker;                                                   \
-    export PATH="/root/.local/bin:$PATH";                                           \
-    nvchecker --version;                                                            \
-                                                                                    \
-    neofetch                                                                        \
+    emerge --info;                                                                  \
+    eix-update;
 
 CMD ["/bin/bash"]
