@@ -25,6 +25,13 @@ RUN set -eux;                                                                   
         dev-vcs/git;                                                                \
                                                                                     \
     emerge --info;                                                                  \
-    eix-update;
+    eix-update;                                                                     \
+                                                                                    \
+    eselect repository enable gentoo-zh;                                            \
+    emerge --sync gentoo-zh;                                                        \
+    emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y \
+        dev-python/nvchecker;                                                       \
+    eselect repository remove -f gentoo-zh
+
 
 CMD ["/bin/bash"]
