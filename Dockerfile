@@ -31,7 +31,9 @@ RUN set -eux;                                                                   
     emerge --sync gentoo-zh;                                                        \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y \
         dev-python/nvchecker;                                                       \
-    eselect repository remove -f gentoo-zh
+    eselect repository remove -f gentoo-zh;                                         \
+                                                                                    \
+    nvchecker --version
 
 
 CMD ["/bin/bash"]
