@@ -12,6 +12,7 @@ RUN set -eux;                                                                   
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y \
         app-eselect/eselect-repository                                              \
         app-portage/eix                                                             \
+        app-portage/flaggie                                                         \
         app-portage/genlop                                                          \
         app-portage/gentoolkit                                                      \
         app-portage/iwdevtools                                                      \
