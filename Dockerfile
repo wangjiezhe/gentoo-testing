@@ -20,6 +20,7 @@ RUN set -eux;                                                                   
         app-portage/mgorny-dev-scripts                                                      \
         app-portage/portage-utils                                                           \
         app-portage/repoman                                                                 \
+        app-misc/jq                                                                         \
         app-misc/neofetch                                                                   \
         dev-python/pip                                                                      \
         dev-util/pkgdev                                                                     \
@@ -28,6 +29,7 @@ RUN set -eux;                                                                   
                                                                                             \
     emerge --info;                                                                          \
     eix-update;                                                                             \
+    pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
     eselect repository enable gentoo-zh;                                                    \
     emerge --sync gentoo-zh;                                                                \
