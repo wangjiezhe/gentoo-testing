@@ -2,6 +2,7 @@ FROM gentoo/portage:latest as portage
 FROM gentoo/stage3:desktop as production
 
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
+COPY gentoo.conf /etc/portage/repos.conf/
 
 WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
@@ -27,7 +28,10 @@ RUN set -eux;                                                                   
         dev-util/pkgcheck                                                                   \
         dev-vcs/git;                                                                        \
                                                                                             \
+    rm --recursive /var/db/repos/gentoo;                                                    \
+    emerge --sync gentoo;                                                                   \
     emerge --info;                                                                          \
+                                                                                            \
     eix-update;                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
