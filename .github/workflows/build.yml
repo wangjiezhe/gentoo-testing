@@ -2,8 +2,8 @@ name: Build Docker Image
 
 on: 
   schedule: 
-    # Daily at 8:20 UTC
-    - cron: "0 0 */3 * *"
+    # Daily
+    - cron: "0 0 * * *"
   push:
 
 env:
