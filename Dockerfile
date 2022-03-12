@@ -1,5 +1,5 @@
 FROM gentoo/portage:latest as portage
-FROM gentoo/stage3:desktop as production
+FROM gentoo/stage3 as production
 
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
 COPY gentoo.conf /etc/portage/repos.conf/
