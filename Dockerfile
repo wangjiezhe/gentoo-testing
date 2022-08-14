@@ -8,7 +8,7 @@ WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
 RUN set -eux;                                                                               \
                                                                                             \
-    eselect news read --quite new >/dev/null 2&>1;                                          \
+    eselect news read --quiet new >/dev/null 2&>1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
     emerge --info;                                                                          \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
