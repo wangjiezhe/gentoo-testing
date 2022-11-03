@@ -20,7 +20,6 @@ RUN set -eux;                                                                   
         app-portage/iwdevtools                                                              \
         app-portage/mgorny-dev-scripts                                                      \
         app-portage/portage-utils                                                           \
-        app-portage/repoman                                                                 \
         app-misc/jq                                                                         \
         app-misc/neofetch                                                                   \
         dev-python/pip                                                                      \
