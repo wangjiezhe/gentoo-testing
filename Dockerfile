@@ -3,6 +3,7 @@ FROM gentoo/stage3 as production
 
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
 COPY gentoo.conf /etc/portage/repos.conf/
+COPY local.conf /etc/portage/repos.conf/
 
 WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
@@ -10,7 +11,6 @@ RUN set -eux;                                                                   
                                                                                             \
     eselect news read --quiet new >/dev/null 2&>1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
-    echo 'PYTHON_TARGETS="python3_10 python3_11"' >> /etc/portage/make.conf;                \
     emerge --info;                                                                          \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         app-eselect/eselect-repository                                                      \
@@ -32,15 +32,17 @@ RUN set -eux;                                                                   
     emerge --sync gentoo;                                                                   \
     emerge --info;                                                                          \
                                                                                             \
-    eix-update;                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
+                                                                                            \
+    emerge --sync local;                                                                    \
+    echo '*/*::local' >> /etc/portage/package.accept_keywords/local;                        \
                                                                                             \
     eselect repository enable gentoo-zh;                                                    \
     emerge --sync gentoo-zh;                                                                \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
-    eselect repository remove -f gentoo-zh;                                                 \
                                                                                             \
+    eix-update;                                                                             \
     nvchecker --version
 
 

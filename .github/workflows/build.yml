@@ -3,13 +3,13 @@ name: Build Docker Image
 on: 
   schedule: 
     # Daily
-    - cron: "0 0 * * *"
+    - cron: "20 2 * * *"
   workflow_dispatch:
   push:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: liangyongxiang/gentoo-testing
+  IMAGE: wangjiezhe/gentoo-testing
 
 jobs:
   build-and-push:
