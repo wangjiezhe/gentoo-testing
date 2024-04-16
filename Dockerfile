@@ -9,9 +9,6 @@ WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
 RUN set -eux;                                                                               \
                                                                                             \
-    emerge --sync local;                                                                    \
-    echo '*/*::local' >> /etc/portage/package.accept_keywords/local;                        \
-                                                                                            \
     eselect news read --quiet new >/dev/null 2&>1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
     emerge --info;                                                                          \
@@ -34,6 +31,9 @@ RUN set -eux;                                                                   
     rm --recursive /var/db/repos/gentoo;                                                    \
     emerge --sync gentoo;                                                                   \
     emerge --info;                                                                          \
+                                                                                            \
+    emerge --sync local;                                                                    \
+    echo '*/*::local' >> /etc/portage/package.accept_keywords/local;                        \
                                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
