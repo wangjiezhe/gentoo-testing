@@ -4,6 +4,7 @@ FROM gentoo/stage3 as production
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
 COPY gentoo.conf /etc/portage/repos.conf/
 COPY local.conf /etc/portage/repos.conf/
+COPY init.sh /
 
 WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
@@ -11,6 +12,7 @@ RUN set -eux;                                                                   
                                                                                             \
     eselect news read --quiet new >/dev/null 2&>1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
+    echo '*/* python perl' >> /etc/portage/package.use/global;                              \
     emerge --info;                                                                          \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         app-eselect/eselect-repository                                                      \
@@ -34,6 +36,7 @@ RUN set -eux;                                                                   
                                                                                             \
     emerge --sync local;                                                                    \
     echo '*/*::local' >> /etc/portage/package.accept_keywords/local;                        \
+    echo '*/*::local test' >> /etc/portage/package.use/local;                               \
                                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
