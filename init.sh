@@ -9,6 +9,10 @@ echo 'TF_CUDA_COMPUTE_CAPABILITIES=8.9' >> /etc/portage/make.conf
 echo 'CUDA_ARCH_BIN=8.9' >> /etc/portage/make.conf
 echo 'NVCC_GENCODE="-gencode=arch=compute_89,code=sm_89"' >> /etc/portage/make.conf
 
+echo '*/*::local' >> /etc/portage/package.accept_keywords/local
+echo '*/*::local test' >> /etc/portage/package.use/local
+echo 'sci-libs/caffe2 cuda' >> /etc/portage/package.use/local
+
 echo 'ftp_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc
 echo 'http_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc
 echo 'https_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc

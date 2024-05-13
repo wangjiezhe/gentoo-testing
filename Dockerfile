@@ -26,6 +26,7 @@ RUN set -eux;                                                                   
         app-portage/portage-utils                                                           \
         app-misc/jq                                                                         \
         app-misc/neofetch                                                                   \
+        app-text/tree                                                                       \
         dev-python/pip                                                                      \
         dev-util/pkgdev                                                                     \
         dev-util/pkgcheck                                                                   \
@@ -36,8 +37,6 @@ RUN set -eux;                                                                   
     emerge --info;                                                                          \
                                                                                             \
     emerge --sync local;                                                                    \
-    echo '*/*::local' >> /etc/portage/package.accept_keywords/local;                        \
-    echo '*/*::local test' >> /etc/portage/package.use/local;                               \
                                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
