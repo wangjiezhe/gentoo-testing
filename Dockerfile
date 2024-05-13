@@ -16,6 +16,7 @@ RUN set -eux;                                                                   
     emerge --info;                                                                          \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         app-eselect/eselect-repository                                                      \
+        app-editors/vim                                                                     \
         app-portage/eix                                                                     \
         app-portage/flaggie                                                                 \
         app-portage/genlop                                                                  \
