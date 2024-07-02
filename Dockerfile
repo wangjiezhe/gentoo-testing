@@ -10,7 +10,7 @@ WORKDIR /
 ENV PATH="/root/.local/bin:${PATH}"
 RUN set -eux;                                                                               \
                                                                                             \
-    eselect news read --quiet new >/dev/null 2&>1;                                          \
+    eselect news read --quiet new >/dev/null 2>&1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
     echo '*/* python perl' >> /etc/portage/package.use/global;                              \
     emerge --info;                                                                          \
