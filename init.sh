@@ -8,6 +8,7 @@ echo 'TORCH_CUDA_ARCH_LIST=8.9' >> /etc/portage/make.conf
 echo 'TF_CUDA_COMPUTE_CAPABILITIES=8.9' >> /etc/portage/make.conf
 echo 'CUDA_ARCH_BIN=8.9' >> /etc/portage/make.conf
 echo 'NVCC_GENCODE="-gencode=arch=compute_89,code=sm_89"' >> /etc/portage/make.conf
+sed -i "/^COMMON_FLAGS/s/-O2 -pipe/-march=native -O2 -pipe/" /etc/portage/make.conf
 
 echo '*/*::local' >> /etc/portage/package.accept_keywords/local
 echo '*/*::local test' >> /etc/portage/package.use/local
