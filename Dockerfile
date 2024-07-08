@@ -45,6 +45,9 @@ RUN set -eux;                                                                   
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
                                                                                             \
+    eselect repository enable guru;                                                         \
+    emerge --sync guru;                                                                     \
+                                                                                            \
     eix-update;                                                                             \
     nvchecker --version
 
