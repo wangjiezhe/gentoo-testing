@@ -10,8 +10,9 @@ RUN set -eux;                                                                   
                                                                                             \
     eselect news read --quiet new >/dev/null 2&>1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
-    echo 'PYTHON_TARGETS="python3_10 python3_11"' >> /etc/portage/make.conf;                \
+    echo 'FEATURES="${FEATURES} getbinpkg"' >> /etc/portage/make.conf;                      \
     emerge --info;                                                                          \
+    getuto;                                                                                 \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         app-eselect/eselect-repository                                                      \
         app-portage/eix                                                                     \
@@ -40,6 +41,7 @@ RUN set -eux;                                                                   
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
     eselect repository remove -f gentoo-zh;                                                 \
+    sed -i '/FEATURES="${FEATURES} getbinpkg"/d' /etc/portage/make.conf;                    \
                                                                                             \
     nvchecker --version
 
