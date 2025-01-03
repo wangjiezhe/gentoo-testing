@@ -42,18 +42,14 @@ RUN set -eux;                                                                   
                                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
-    eselect repository enable gentoo-zh;                                                    \
-    emerge --sync gentoo-zh;                                                                \
+    eselect repository enable gentoo-zh guru;                                               \
+    emerge --sync gentoo-zh guru;                                                           \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
                                                                                             \
     sed -i '/FEATURES="${FEATURES} getbinpkg"/d' /etc/portage/make.conf;                    \
     rm --recursive /var/cache/binpkgs/* /var/cache/distfiles/*;                             \
                                                                                             \
-    eselect repository enable guru;                                                         \
-    emerge --sync guru;                                                                     \
-                                                                                            \
-    eix-update;                                                                             \
     nvchecker --version
 
 
