@@ -13,7 +13,9 @@ RUN set -eux;                                                                   
     eselect news read --quiet new >/dev/null 2>&1;                                          \
     echo 'FEATURES="-ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf; \
     echo '*/* python perl' >> /etc/portage/package.use/global;                              \
+    echo 'FEATURES="${FEATURES} getbinpkg"' >> /etc/portage/make.conf;                      \
     emerge --info;                                                                          \
+    getuto;                                                                                 \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         app-eselect/eselect-repository                                                      \
         app-editors/vim                                                                     \
@@ -44,6 +46,9 @@ RUN set -eux;                                                                   
     emerge --sync gentoo-zh;                                                                \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
+                                                                                            \
+    sed -i '/FEATURES="${FEATURES} getbinpkg"/d' /etc/portage/make.conf;                    \
+    rm --recursive /var/cache/binpkgs/* /var/cache/distfiles/*;                             \
                                                                                             \
     eselect repository enable guru;                                                         \
     emerge --sync guru;                                                                     \
