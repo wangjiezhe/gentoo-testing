@@ -14,6 +14,6 @@ echo '*/*::local' >> /etc/portage/package.accept_keywords/local
 echo '*/*::local test' >> /etc/portage/package.use/local
 echo 'sci-libs/caffe2 cuda' >> /etc/portage/package.use/local
 
-echo 'ftp_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc
-echo 'http_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc
-echo 'https_proxy = http://host.docker.internal:1084/' >> /etc/wgetrc
+echo 'ftp_proxy = http://host.docker.internal:1081/' >> /etc/wgetrc
+echo 'http_proxy = http://host.docker.internal:1081/' >> /etc/wgetrc
+echo 'https_proxy = http://host.docker.internal:1081/' >> /etc/wgetrc
