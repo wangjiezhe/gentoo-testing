@@ -23,6 +23,7 @@ RUN set -eux;                                                                   
         app-portage/mgorny-dev-scripts                                                      \
         app-portage/portage-utils                                                           \
         app-misc/jq                                                                         \
+        dev-python/jq                                                                       \
         app-misc/neofetch                                                                   \
         dev-python/pip                                                                      \
         dev-util/pkgdev                                                                     \
