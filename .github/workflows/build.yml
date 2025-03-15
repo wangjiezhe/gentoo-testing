@@ -1,9 +1,9 @@
 name: Build Docker Image
 
-on: 
-  schedule: 
+on:
+  # schedule:
     # Daily
-    - cron: "20 2 * * *"
+    # - cron: "20 2 * * *"
   workflow_dispatch:
   push:
 
