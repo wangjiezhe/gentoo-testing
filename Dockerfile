@@ -43,8 +43,17 @@ RUN set -eux;                                                                   
                                                                                             \
     pkgcheck cache --update --repo gentoo;                                                  \
                                                                                             \
-    eselect repository enable gentoo-zh guru;                                               \
-    emerge --sync gentoo-zh guru;                                                           \
+    eselect repository enable gentoo-zh guru sage-on-gentoo;                                \
+    emerge --sync gentoo-zh guru sage-on-gentoo;                                            \
+    ln -s /var/db/repos/sage-on-gentoo/tools/package.keywords/sage                          \
+          /etc/portage/package.accept_keywords/sage                                         \
+    ln -s /var/db/repos/sage-on-gentoo/tools/package.use/sage                               \
+          /etc/portage/package.use/sage                                                     \
+    mkdir -p /etc/portage/sets                                                              \
+    ln -s /var/db/repos/sage-on-gentoo/tools/sets/sagemath                                  \
+          /etc/portage/sets/sagemath                                                        \
+    ln -s /var/db/repos/sage-on-gentoo/tools/sets/sagemath-optional                         \
+          /etc/portage/sets/sagemath-optional                                               \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
                                                                                             \
