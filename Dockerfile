@@ -1,9 +1,7 @@
 FROM gentoo/portage:latest as portage
-FROM gentoo/stage3 as production
+FROM gentoo/stage3:amd64-desktop-systemd as production
 
 COPY --from=portage /var/db/repos/gentoo/ /var/db/repos/gentoo
-COPY gentoo.conf /etc/portage/repos.conf/
-COPY local.conf /etc/portage/repos.conf/
 COPY init.sh /
 
 WORKDIR /
@@ -36,15 +34,9 @@ RUN set -eux;                                                                   
         dev-vcs/git;                                                                        \
                                                                                             \
     rm --recursive /var/db/repos/gentoo;                                                    \
-    emerge --sync gentoo;                                                                   \
-    emerge --info;                                                                          \
-                                                                                            \
-    emerge --sync local;                                                                    \
-                                                                                            \
-    pkgcheck cache --update --repo gentoo;                                                  \
-                                                                                            \
+    eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git;          \
     eselect repository enable gentoo-zh guru sage-on-gentoo;                                \
-    emerge --sync gentoo-zh guru sage-on-gentoo;                                            \
+    emerge --sync;                                                                          \
     ln -s /var/db/repos/sage-on-gentoo/tools/package.keywords/sage                          \
           /etc/portage/package.accept_keywords/sage;                                        \
     ln -s /var/db/repos/sage-on-gentoo/tools/package.use/sage                               \
@@ -54,6 +46,8 @@ RUN set -eux;                                                                   
           /etc/portage/sets/sagemath;                                                       \
     ln -s /var/db/repos/sage-on-gentoo/tools/sets/sagemath-optional                         \
           /etc/portage/sets/sagemath-optional;                                              \
+    emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y --update\
+        --deep --newuse @world;                                                             \
     emerge --verbose --quiet --jobs $(nproc) --autounmask y --autounmask-continue y         \
         dev-python/nvchecker;                                                               \
                                                                                             \

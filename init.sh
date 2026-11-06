@@ -1,5 +1,8 @@
 #!/bin/bash
 
+eselect repository add local git https://github.com/wangjiezhe/gentoo-local.git
+emerge --sync local
+
 echo "x11-drivers/nvidia-drivers-546.30" >> /etc/portage/profile/package.provided
 
 echo 'GENTOO_MIRRORS="https://mirrors.tuna.tsinghua.edu.cn/gentoo"' >> /etc/portage/make.conf
