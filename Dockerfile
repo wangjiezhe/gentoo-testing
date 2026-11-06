@@ -52,7 +52,7 @@ RUN set -eux;                                                                   
         dev-python/nvchecker;                                                               \
                                                                                             \
     sed -i '/FEATURES="${FEATURES} getbinpkg"/d' /etc/portage/make.conf;                    \
-    rm --recursive /var/cache/binpkgs/* /var/cache/distfiles/*;                             \
+    rm --recursive /var/cache/binhost/* /var/cache/distfiles/*;                             \
                                                                                             \
     nvchecker --version
 
